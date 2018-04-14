@@ -15,11 +15,13 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_4c33ffd30822_key -iv $encrypted_4c33ffd30822_iv
   -in .travis/id_rsa_blog.enc -out ~/.ssh/id_rsa -d
 - chmod 600 ~/.ssh/id_rsa
-- sudo cp .travis/known_hosts ~/.ssh/known_hosts
-- chmod 600 ~/.ssh/known_hosts
 - sudo cp .travis/ssh_config /etc/ssh/ssh_config
 - sudo chmod 755 /etc/ssh/ssh_config
 - eval "$(ssh-agent -s)"
 - ssh-add ~/.ssh/id_rsa
 - git config --global user.name "mapleray"
 - git config --global user.email "zhiwuliao@gmail.com"
+notifications:
+  slack:
+    rooms:
+      secure: cUJD5/HfC5w5ehBYpP3og+uoqW7r5U7T8pu8TwtXJAKaf3pJH5HcdR1ijMVutMNZaoQvecipetH3mwV0Ez6EpjgRcNZDHqNkC0q+GslhmgUf5MndNh/DrAwdKVjVpZhP4x4Cl9OLRFFovASIf10ui+fh9hesKzORhQCmUGxfFbzaee9ArxrN97hLGvr8xcxyw6jQ3pAjuna8BEZKGMuIGjZWxuMW82O6B2FRzo7IYhBZA08wDEUwPsgh9YXhoIX7qNS6AWOBFynPRI70XHUarJz6ofCW4D4rtuyIMwa1TG5sJbgRsfEchWqG6U+4Kqvy9pg+KqbvmT+dfdA88ej0FB5HB5PCwMK67W6zjWEsJPbuFVah8QBUxcnjxAqredkzKjXstXIPOFj53fheDOF6DJDGOxMMumWO1Cf166H1eMUdidRwEv8mcEBPtzO2rQ6SASeJu6Pc1RccN2eGY8WFy0R7qpfWmhQQe2eQzraDuYefyRzQDmO77Q0TJQm3i+E8HTZ1FczQafDvfs7wGGtQNLVwjqBzcDQLC+GAG4ZpG1QioNQZR61W0jck0uv1KLmR44aq1tP62I+LLH12CQJFIMTISg/anBpr74GA5BsDzArrbrgGJPPI7QI2/bXbwhcm2/gh3Eb7NqLlFCkJm/qhOSjrJC74OOYoayeJHrICJc0=
