@@ -11,9 +11,9 @@ date: 2016-01-01 00:00:00
 
 ### 本文的存在仅是对自己无能的愤怒而已。
 
->>> Red: These walls are kind of funny. First you hate ’em, then you get used to ’em. Enough time passes, gets so you depend on them. That’s institutionalized. They send you here for life, that’s exactly what they take. The part that counts, anyways.
->>> 
----The Shawshank Redemption
+> Red: These walls are kind of funny. First you hate ’em, then you get used to ’em. Enough time passes, gets so you depend on them. That’s institutionalized. They send you here for life, that’s exactly what they take. The part that counts, anyways.
+>
+> ---The Shawshank Redemption
 
 回望2015年，发现没留下什么回忆，唯一最重要的一件事就是我毕业了，我不再拥有学生时代了，虽然我有机会继续再当几年学生，不过还是放弃了，这也导致了后面一系列的事情。
 
@@ -33,7 +33,7 @@ date: 2016-01-01 00:00:00
 
 饱食终日，无所用心，何时才能成为高度自驱的人呢？
 
->>> 常言道：follow your heart, but where is my heart? where is my dream?
+> 常言道：follow your heart, but where is my heart? where is my dream?
 
 
 #### // 关于读研的一些思考
@@ -44,6 +44,5 @@ date: 2016-01-01 00:00:00
 
 想到高考过后当时的物理老师说过的一些话,只要你能拿出高考时候40%的努力，一半都不用，你在大学及以后的学习中将会游刃有余，因为高考过后大部分人都懈怠了，能拿出20%的人少之又少，所以只要稍微努力些，稍微主动些已经超过大部分人了。
 
->>> 种下一棵树最好的时间是过去和现在,永远知道自己在做什么、自己需要什么就行了。
-
+> 种下一棵树最好的时间是过去和现在,永远知道自己在做什么、自己需要什么就行了。
 

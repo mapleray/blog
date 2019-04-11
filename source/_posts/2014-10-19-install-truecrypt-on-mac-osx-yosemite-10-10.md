@@ -17,23 +17,20 @@ Guess the OS X version numbers. Truecrypt thinks 10.10 is < 10.4 (the minimum Tr
 
 In the end, I found two solutions:
 
+## The first:
 
-First method
-------
 * Open the .dmg
 * You’ll find the .mpkg. Right*click and “Show Package Contents”
 * Open Contents Dir
 * Open Packages Dir
-* Install each of the 4 packages in this order: OSXFUSECore.pkg, OSXFUSEMacFUSE.pkg, MacFUSE.pkg, TrueCrypt.pkg (It is possible MacFUSE.pkg will install the two before it, but we ran each to play it safe.).
+* Install each of the 4 packages in this order: `OSXFUSECore.pkg`, `OSXFUSEMacFUSE.pkg`, `MacFUSE.pkg`, `TrueCrypt.pkg` (It is possible MacFUSE.pkg will install the two before it, but we ran each to play it safe.).
 
 That’s it; it’s Truecrypt has been working fine for us using this method.
 
-Second method
-------
-
+## The second:
 
 * Open the .dmg
-* You’ll find the .mpkg. Right*click and “Show Package Contents”
+* You’ll find the `.mpkg`. Right click and “Show Package Contents”
 * Open Contents Dir
 * Edit Contents/distribution.dist using Text Editor
 * You'll find the code as below
@@ -55,3 +52,4 @@ Second method
 		}
 
 Now, you can install  .mpkg  without error.
+

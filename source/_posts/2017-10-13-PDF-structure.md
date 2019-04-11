@@ -9,15 +9,15 @@ categories:
 ---
 
 
-# 基本要素
+## 基本要素
 
-## 数据类型
+### 数据类型
 
 PDF 文件基本元素是 PDF 对象(PDF Object), PDF 对象包括直接对象(Direct Object)和间接对象(Indirect Object)。直接对象如下八种类型；间接对象，又叫 `labelled object`, 嵌套在关键词 `n 0 obj` 和 `endobj` 之间， 是用一种表示来标识一个 PDF 对象，通过标识来让别的 PDF 对象引用，这个标识叫做间接对象的 ID.
 
 <!-- more -->
 
-### 直接对象类型
+#### 直接对象类型
 
 1. Boolean value(布尔)
 
@@ -72,7 +72,7 @@ PDF 文件基本元素是 PDF 对象(PDF Object), PDF 对象包括直接对象(D
 
     空对象类型，用关键词 `null` 表示。
 
-### 间接对象类型
+#### 间接对象类型
 
 使用 unique object identifier 来表示，方便其他对象引用。结构如下：
 
@@ -85,7 +85,7 @@ PDF 文件基本元素是 PDF 对象(PDF Object), PDF 对象包括直接对象(D
         12 0 R
 
 
-## 文件结构
+### 文件结构
 
 文件基本结构如下，文件结构的详细内容分析将在实例分析中说明。
 
@@ -113,7 +113,8 @@ PDF 文件基本元素是 PDF 对象(PDF Object), PDF 对象包括直接对象(D
             +--------------------------+
 
 ```
-### 交叉引用表
+
+#### 交叉引用表
 
 交叉引用表的结构如下：
 
@@ -128,7 +129,7 @@ nnnnnnnnnn ggggg N eol
 
 第一行 `xref` 表示交叉引用表开始；第二行 `i j` 表示下面部分引用的对象从 `i` 开始，共有 `j` 个对象；第三行开始相同的结构，每行20字节，包括换行符。 `nnnnnnnnnn` 10位，字节偏移地址，表示从 **文件开始（beginning of the file)** 到 **该对象开始(beginning of the object)** 的偏移； `ggggg` 5位，生成号； `N` 可以为 `n` 或者 `f`，其中 `n` 表示该对象在使用，`f` 表示该对象为free状态，未被使用。
 
-# 处理流程
+## 处理流程
 
 ```
             +--------------------------+
@@ -166,7 +167,7 @@ nnnnnnnnnn ggggg N eol
             +--------------------------+
 ```
 
-# 实例分析
+## 实例分析
 
 ```
 %PDF-1.6            # 文件头，表示该文档符合 PDF 1.6 规范 ， % 表示注释
@@ -236,14 +237,15 @@ startxref
 %%EOF      # 标识文件结束
 ```
 
-# 其他
+## 其他
 
-#### 工具:
+### 工具:
 
 - [peepdf](http://eternal-todo.com/tools/peepdf-pdf-analysis-tool)
 - [pdfium](pdfium.googlesource.com/pdfium/)
 
-#### 参考:
+### 参考:
+
 - [Adobe PDF Reference](https://www.adobe.com/cn/devnet/pdf/pdf_reference.html)
 - [一个简单PDF文件的结构分析](http://blog.csdn.net/pdfMaker/article/details/573990)
 - [PDF文件格式的一些研究心得](https://www.cnblogs.com/Ironsoft/archive/2006/01/05/311467.html)

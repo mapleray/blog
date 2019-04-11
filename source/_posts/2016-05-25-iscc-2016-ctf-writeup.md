@@ -2,18 +2,17 @@
 title: ISCC 2016 writeup (部分题解)
 date: 2016-05-25 15:02:13
 permalink: iscc-2016-ctf-writeup
-tags: 
+tags:
   - ctf
   - iscc
 desc: iscc 2016 ctf 比赛
-categories: 
+categories:
   - ctf
 ---
 
 ### Basic50 Find to me
-------
 
-> 已知仿射加密变换为c=（11m+8）mod26，试对密文sjoyuxzr解密
+> 已知仿射加密变换为 c = (11m+8) mod 26，试对密文 sjoyuxzr 解密
 
 看这篇文章就能弄懂 [http://bbs.pediy.com/showthread.php?t=89299](http://bbs.pediy.com/showthread.php?t=89299)
 
@@ -21,7 +20,6 @@ categories:
 
 
 ### Basic50 好长的字符串
-------
 
 ```
 Vm0wd2QyVkhVWGhVYmxKV1YwZDRXRmxVUm5kVlJscHpXa2M1
@@ -41,7 +39,6 @@ kZWbXBXVjFKc2NGaFdha3BIVTBaYWRWSnNTbGRTTTAwMQ==
 
 
 ### Basic50 明察秋毫
-------
 
 查看网页源码，得到 `maybe not flag : Jr1p0zr2VfPp` 看似 `rot13`，解得
 
@@ -49,7 +46,6 @@ kZWbXBXVjFKc2NGaFdha3BIVTBaYWRWSnNTbGRTTTAwMQ==
 
 
 ### Basic100 心灵鸡汤
--------
 
 比较简单的逆向，可以发现加上参数 `ISCC`会有不同的结果
 
@@ -61,7 +57,6 @@ kZWbXBXVjFKc2NGaFdha3BIVTBaYWRWSnNTbGRTTTAwMQ==
 
 
 ### Basic100 小伟的密码
--------
 
 这道题有点运气。。。我做题时没windows系统，都是在mac下面看的题目，结果能直接看见隐藏的文件。。。
 
@@ -72,7 +67,6 @@ kZWbXBXVjFKc2NGaFdha3BIVTBaYWRWSnNTbGRTTTAwMQ==
 `flag: ImnrelnaSicoftethgoicynyrouTo`
 
 ### Baisc200 JJ
-------
 
 ![](/media/14630355493646/14630414489708.jpg)
 
@@ -87,7 +81,6 @@ js fuck.解码得到一个百度云链接，下载下来
 
 
 ### Misc150 一切都在
-------
 
 分析网络请求，发现有个图片的请求，提取数据得到一个图片
 
@@ -95,7 +88,6 @@ js fuck.解码得到一个百度云链接，下载下来
 
 
 ### Misc200 Music Never Sleep
-------
 
 mp3文件写隐，一直没头绪，`strings + grep` 一阵乱搜也没什么，用Audacity看了也没看出什么来。后面才知道是 mp3stego[http://www.petitcolas.net/steganography/mp3stego/](http://www.petitcolas.net/steganography/mp3stego/), 根据页面example发现需要密码，重新搜关键词 `iscc`
 
@@ -113,7 +105,6 @@ Flag is SkYzWEk0M1JOWlNHWTJTRktKUkdJTVpXRzVSV0U2REdHTVpHT1pZPQ== ???
 
 
 ### Misc300 毕业论文
-------
 
 这道题真的是考脑洞。。。刚开始一直以为会在图片上做文章，后面发现完全不是这样，这个今年的zctf有相似的题，见[http://www.freebuf.com/articles/web/94444.html](http://www.freebuf.com/articles/web/94444.html)
 
@@ -148,7 +139,6 @@ print len(str1)
 
 
 ### web150 flag in flag
-------
 
 ![](/media/14630355493646/14630388492254.jpg)
 
@@ -159,7 +149,6 @@ print len(str1)
 
 
 ### web300 PING出事了吧
----------
 
 访问 `http://101.200.145.44/web2/` 一看感觉像是shell 命令拼接
 
@@ -184,7 +173,6 @@ print len(str1)
 这个才是最终的flag。这个源码给的提示，我服！
 
 ### Web350 simple injection
-------
 
 直接是一个登录页面，看题目，像是sql注入，试了一下发现`username`存在注入，但是按照平常的用sqlmap一直跑的话会一直500错误，感觉需要处理一下payload，后面才知道应该使用sqlmap的tamper。先用`burpsuite`导出post提交的内容，然后结合sqlmap:
 
@@ -200,7 +188,6 @@ python sqlmap.py -r iscc.txt --tamper space2comment
 
 
 ### Web350 double kill
-------
 
 看见url里面出现了`page=submit`和`page=view`立马想到了文件包含。自己还能上传图片，应该去包含自己的图片干一些事情。图片是以上传的时间戳加后缀保存的，包含的时间直接加路径不行，需要加上`%00`截断。
 
@@ -217,7 +204,6 @@ http://101.200.145.44/web5/index.php?page=uploads/1463714491.jpg%00
 
 
 ### Reverse150 Help me
-------
 
 下载附近，扔进IDA，简单看下，就是输入一个数字看是不是符合要求，如果正确则会给出：`Thanks for your key, now here is what you want : {flag}`， 逆向算法自己不会。。。只有简单爆破了
 
@@ -243,7 +229,6 @@ for i in xrange(999999999, 1, -1):
 `Thanks for your key, now here is what you want : ISCC{n0t_5o-diffic1u7}`
 
 ### Reverse150 仪式
-------
 
 ![](/media/14630355493646/14640888832453.jpg)
 
@@ -258,7 +243,7 @@ IDA分析，定位到函数`sub_402860`，函数`sub_41CBE4`是获取输入框�
 
 
 ### Pwn100
-------
+
 第一次做逆向题，很多都是在`Shrek_wzw`指点下完成的。
 
 先静态分析：
@@ -297,7 +282,6 @@ print r.recv()
 
 
 ### Pwn250 guess
-------
 
 有个相似的题目 [https://www.securifera.com/blog/2015/09/09/mmactf-2015-rock-paper-scissors-rps/](https://www.securifera.com/blog/2015/09/09/mmactf-2015-rock-paper-scissors-rps/)
 
@@ -351,7 +335,6 @@ r.close()
 
 
 ### Pwn300 pycalc
-------
 
 一道python  sandbox 绕过的题目，相似ctf题都是用的`warnings.catch_warnings.__enter__.__func__.__globals__['linecache'].checkcache.__globals__['os']
 `这个来绕过，这个题在这里有限制。直接题目给的`__builtins__`其实是有限制的，需要从其它模块中得到`__builtins__`
