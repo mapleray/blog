@@ -93,6 +93,8 @@ deploy:
   repo: git@github.com:mapleray/blog.git
   branch: gh-pages
   message: Update
+  name: mapleray
+  email: zhiwuliao@gmail.com
 
 archive_generator:
   per_page: 30
