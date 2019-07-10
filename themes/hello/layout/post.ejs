@@ -1,4 +1,5 @@
 <article id="post" itemscope itemtype="http://schema.org/Article">
+  <img itemprop="image" hidden src="/favicon.ico">
   <link itemprop="mainEntityOfPage" href="<%-config.url%><%=url_for(page.path)%>"/>
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="<%-page.title %>"/>
@@ -6,10 +7,11 @@
   <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="<%- config.author %>"/>
     <meta itemprop="description" content="<%- config.description %>"/>
+    <meta itemprop="image" content="<%= url_for(theme.avatar.url) %>">
   </span>
   <header>
-  <h1><%=page.title%></h1>
-  <p>Written on <time itemprop="dateCreated datePublished" datetime="<%=page.date.toJSON()%>"><%=date(page.date)%></time></p>
+  <h1 itemprop="headline name"><%=page.title%></h1>
+  <p>Written on <time itemprop="dateCreated datePublished dateModified" datetime="<%=page.date.toJSON()%>"><%=date(page.date)%></time></p>
   </header>
   <div class="page-toc">
     <details class="toc">

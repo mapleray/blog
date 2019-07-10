@@ -21,6 +21,9 @@ stylesheets:
 scripts:
 - /js/hello.js
 
+avatar:
+  url: /favicon.ico
+
 less:
   paths:
     - source/css
