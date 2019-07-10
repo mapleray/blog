@@ -1,0 +1,10 @@
+<% const current = date(Date.now(), "YYYY") %>
+<footer class="footer">
+    <div id="bottom-inner">
+      &copy; <%=config.author%>
+      <% if (theme.footer.since && theme.footer.since != current) { %>
+        <span><%=theme.footer.since%></span> &mdash;
+      <% } %>
+      <span><%=current%></span>
+    </div>
+</footer >

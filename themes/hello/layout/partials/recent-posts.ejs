@@ -1,0 +1,14 @@
+
+<% if (page.posts.length > 0) { %>
+  <div id="recent-posts">
+    <h1>Blog</h1>
+    <% page.posts.sort('date', -1).limit(10).each(post => { %>
+      <div class="recent-post-item">
+        <time datetime="<%=post.date.toJSON()%>" class="archive-time">
+          <%=date(post.date)%>
+        </time>
+        <a href="<%=url_for(post.path)%>" class="archive-title"><%=post.title%></a>
+      </div>
+    <% }); %>
+  </div>
+<% } %>

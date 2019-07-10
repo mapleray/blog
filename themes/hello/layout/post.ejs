@@ -1,0 +1,31 @@
+<article id="post" itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="<%-config.url%><%=url_for(page.path)%>"/>
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="<%-page.title %>"/>
+  </span>
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="<%- config.author %>"/>
+    <meta itemprop="description" content="<%- config.description %>"/>
+  </span>
+  <header>
+  <h1><%=page.title%></h1>
+  <p>Written on <time itemprop="dateCreated datePublished" datetime="<%=page.date.toJSON()%>"><%=date(page.date)%></time></p>
+  </header>
+  <div class="page-toc">
+    <details class="toc">
+      <summary class="toc-accordion">
+        <%= theme.toc.title %>
+      </summary>
+        <% if (theme.toc.enable) { %>
+          <%- toc(page.content, {list_number: theme.toc.number}) %>
+        <% } %>
+      </details>
+  </div>
+  <div itemprop="articleBody">
+    <%-page.content%>
+  </div>
+</article>
+
+<div id="paginator">
+  <%-paginator()%>
+</div>

@@ -1,0 +1,24 @@
+
+<%
+var current_year = '';
+%>
+
+  <div id="archive">
+    <h1>Blog</h1>
+
+  <% page.posts.each(article => { %>
+    <% if (date(article.date, 'YYYY') != current_year) { %>
+      <% current_year = date(article.date, 'YYYY') %>
+      <h2 class="archive-year"><%=current_year%></h2>
+    <% } %>
+    <div class="archive-item">
+      <time datetime="<%=date_xml(article.date)%>" class="archive-time">
+          <%=date(article.date)%>
+      </time>
+      <a href="<%=url_for(article.path)%>">
+        <%=article.title%>
+      </a>
+    </div>
+  <% }) %>
+
+  </div>

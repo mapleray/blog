@@ -1,0 +1,38 @@
+# html lang
+language: en
+
+# main menu navigation
+menu:
+  Home: /
+  Leetcode: /leetcode/
+  About: /about/
+
+# stylesheets loaded in the <head>
+stylesheets:
+- /css/normalize.css
+- /css/base.css
+- /css/aside.css
+- /css/blockquote.css
+- /css/permalink.css
+- /css/postscript.css
+- /css/highlight/index.css
+
+# scripts loaded in the end of the body
+scripts:
+- /js/hello.js
+
+less:
+  paths:
+    - source/css
+  compress:
+    true
+
+toc:
+  enable: true
+  number: true
+  title: "Table of Contents"
+
+footer:
+  since: 2016
+
+google_analytics: UA-35288944-1
