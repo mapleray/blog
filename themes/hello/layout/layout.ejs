@@ -1,4 +1,3 @@
-
 <%
 var pageTitle = page.title || config.subtitle || '';
 if (is_archive()) pageTitle = 'Blog';
@@ -8,9 +7,8 @@ if (is_month()) pageTitle += ': ' + page.month + '/' + page.year;
 if (is_year()) pageTitle += ': ' + page.year;
 pageTitle += ' | ' + config.title;
 %>
-
 <!DOCTYPE html>
-<html lang="<%- config.language || theme.language || 'en' %>">
+<html lang="<%= config.language || theme.language || 'en' %>">
 <head>
   <%- partial('partials/head') %>
   <title><%=pageTitle%></title>
@@ -43,6 +41,8 @@ pageTitle += ' | ' + config.title;
       <script src="<%=url%>"></script>
     <% }); %>
   <% } %>
+
+  <%- partial('_third-party/google-analytics') %>
 
 </body>
 </html>
