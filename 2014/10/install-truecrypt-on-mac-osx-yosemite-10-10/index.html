@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>Install TrueCrypt On Mac OS X Yosemite 10.10 | Lazymind</title>
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+    
+      <link rel="stylesheet" href="/css/base.css">
+    
+      <link rel="stylesheet" href="/css/aside.css">
+    
+      <link rel="stylesheet" href="/css/blockquote.css">
+    
+      <link rel="stylesheet" href="/css/permalink.css">
+    
+      <link rel="stylesheet" href="/css/postscript.css">
+    
+      <link rel="stylesheet" href="/css/highlight/index.css">
+    
+  
+</head>
+<body>
+  <div class="page">
+    <nav id="menu-outer">
+      <div id="menu-inner">
+        
+          <a href="/">Home</a>
+        
+          <a href="/leetcode/">Leetcode</a>
+        
+          <a href="/about/">About</a>
+        
+      </div>
+    </nav>
+
+    <div id="content-outer">
+      <div id="content-inner">
+        <article id="post" itemscope itemtype="http://schema.org/Article">
+  <img itemprop="image" hidden src="/favicon.ico">
+  <link itemprop="mainEntityOfPage" href="https://lazymind.me/2014/10/install-truecrypt-on-mac-osx-yosemite-10-10/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Install TrueCrypt On Mac OS X Yosemite 10.10">
+  </span>
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Conan">
+    <meta itemprop="description" content="The quieter you are the more you are able to hear.">
+    <meta itemprop="image" content="/favicon.ico">
+  </span>
+  <header>
+  <h1 itemprop="headline name">Install TrueCrypt On Mac OS X Yosemite 10.10</h1>
+  <p>Written on <time itemprop="dateCreated datePublished dateModified" datetime="2014-10-19T00:00:00.000Z">2014-10-19</time></p>
+  </header>
+  <div class="page-toc">
+    <details class="toc">
+      <summary class="toc-accordion">
+        Table of Contents
+      </summary>
+        
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-first"><span class="toc-number">1.</span> <span class="toc-text">The first:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-second"><span class="toc-number">2.</span> <span class="toc-text">The second:</span></a></li></ol>
+        
+      </details>
+  </div>
+  <div itemprop="articleBody">
+    <p>Yesterday, I upgraded my MacBook OS to Yosemite 10.10. But when I reinstall <a href="http://en.wikipedia.org/wiki/TrueCrypt" target="_blank" rel="noopener">Truecrypt</a>(For some reasons, recommend Truecrypt 7.1a version), something get error.</p>
+<p><img src="/images/truecrypt-install-error.png" alt="TrueCrypt-Error"></p>
+<p>Guess the OS X version numbers. Truecrypt thinks 10.10 is &lt; 10.4 (the minimum Truecrypt requires), and the installer will block it’s installation on Yosemite. So you’ll be able to install it again on 10.40…or maybe, possibly 10.11 or later.</p>
+<p>In the end, I found two solutions:</p>
+<h2 id="The-first"><a href="#The-first" class="headerlink" title="The first:"></a>The first:</h2><ul>
+<li>Open the .dmg</li>
+<li>You’ll find the .mpkg. Right*click and “Show Package Contents”</li>
+<li>Open Contents Dir</li>
+<li>Open Packages Dir</li>
+<li>Install each of the 4 packages in this order: <code>OSXFUSECore.pkg</code>, <code>OSXFUSEMacFUSE.pkg</code>, <code>MacFUSE.pkg</code>, <code>TrueCrypt.pkg</code> (It is possible MacFUSE.pkg will install the two before it, but we ran each to play it safe.).</li>
+</ul>
+<p>That’s it; it’s Truecrypt has been working fine for us using this method.</p>
+<h2 id="The-second"><a href="#The-second" class="headerlink" title="The second:"></a>The second:</h2><ul>
+<li><p>Open the .dmg</p>
+</li>
+<li><p>You’ll find the <code>.mpkg</code>. Right click and “Show Package Contents”</p>
+</li>
+<li><p>Open Contents Dir</p>
+</li>
+<li><p>Edit Contents/distribution.dist using Text Editor</p>
+</li>
+<li><p>You’ll find the code as below</p>
+<pre><code>function pm_install_check() {
+  if(!(system.version.ProductVersion &gt;= &apos;10.4.0&apos;)) {
+    my.result.title = &apos;Error&apos;;
+    my.result.message = &apos;TrueCrypt requires Mac OS X 10.4 or later.&apos;;
+    my.result.type = &apos;Fatal&apos;;
+    return false;
+  }
+  return true;
+}</code></pre></li>
+<li><p>change it as follow:</p>
+<pre><code>function pm_install_check() {
+  return true;
+}</code></pre></li>
+</ul>
+<p>Now, you can install  .mpkg  without error.</p>
+
+  </div>
+</article>
+
+<div id="paginator">
+  
+</div>
+
+      </div>
+    </div>
+    
+<footer class="footer">
+    <div id="bottom-inner">
+      &copy; Conan
+      
+        <span>2016</span> &mdash;
+      
+      <span>2019</span>
+    </div>
+</footer>
+
+  </div>
+
+  
+    
+      <script src="/js/hello.js"></script>
+    
+  
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-35288944-1"></script>
+<script>
+  var host = window.location.hostname;
+  if (host != "localhost" || host != "127.0.0.1") {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-35288944-1');
+  }
+</script>
+
+
+
+</body>
+</html>

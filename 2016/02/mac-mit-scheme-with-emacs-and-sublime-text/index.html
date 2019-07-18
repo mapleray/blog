@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>Mac 下配置 mit-scheme 环境 | Lazymind</title>
+  
+    
+      <link rel="stylesheet" href="/css/normalize.css">
+    
+      <link rel="stylesheet" href="/css/base.css">
+    
+      <link rel="stylesheet" href="/css/aside.css">
+    
+      <link rel="stylesheet" href="/css/blockquote.css">
+    
+      <link rel="stylesheet" href="/css/permalink.css">
+    
+      <link rel="stylesheet" href="/css/postscript.css">
+    
+      <link rel="stylesheet" href="/css/highlight/index.css">
+    
+  
+</head>
+<body>
+  <div class="page">
+    <nav id="menu-outer">
+      <div id="menu-inner">
+        
+          <a href="/">Home</a>
+        
+          <a href="/leetcode/">Leetcode</a>
+        
+          <a href="/about/">About</a>
+        
+      </div>
+    </nav>
+
+    <div id="content-outer">
+      <div id="content-inner">
+        <article id="post" itemscope itemtype="http://schema.org/Article">
+  <img itemprop="image" hidden src="/favicon.ico">
+  <link itemprop="mainEntityOfPage" href="https://lazymind.me/2016/02/mac-mit-scheme-with-emacs-and-sublime-text/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Mac 下配置 mit-scheme 环境">
+  </span>
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Conan">
+    <meta itemprop="description" content="The quieter you are the more you are able to hear.">
+    <meta itemprop="image" content="/favicon.ico">
+  </span>
+  <header>
+  <h1 itemprop="headline name">Mac 下配置 mit-scheme 环境</h1>
+  <p>Written on <time itemprop="dateCreated datePublished dateModified" datetime="2016-02-17T00:00:00.000Z">2016-02-17</time></p>
+  </header>
+  <div class="page-toc">
+    <details class="toc">
+      <summary class="toc-accordion">
+        Table of Contents
+      </summary>
+        
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-mit-scheme"><span class="toc-number">1.</span> <span class="toc-text">安装 mit-scheme</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运行"><span class="toc-number">2.</span> <span class="toc-text">运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Emacs-中集成-mit-scheme"><span class="toc-number">3.</span> <span class="toc-text">Emacs 中集成 mit-scheme</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sublime-text-中集成-mit-scheme"><span class="toc-number">4.</span> <span class="toc-text">sublime-text 中集成 mit-scheme</span></a></li></ol>
+        
+      </details>
+  </div>
+  <div itemprop="articleBody">
+    <h3 id="安装-mit-scheme"><a href="#安装-mit-scheme" class="headerlink" title="安装 mit-scheme"></a>安装 mit-scheme</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mit-scheme</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><ol>
+<li><p>命令行输入 <code>mit-scheme</code> 进入交互模式</p>
+</li>
+<li><p>切换工作目录</p>
+<pre><code>(cd &quot;~/workspaces&quot;)</code></pre></li>
+<li><p>加载 scheme 源文件</p>
+<pre><code>(load &quot;hello.scm&quot;)</code></pre></li>
+<li><p>退出交互环境</p>
+<pre><code>(quit)</code></pre></li>
+</ol>
+<h3 id="Emacs-中集成-mit-scheme"><a href="#Emacs-中集成-mit-scheme" class="headerlink" title="Emacs 中集成 mit-scheme"></a>Emacs 中集成 mit-scheme</h3><ul>
+<li><p>编辑 <code>~/.emacs</code> 文件，加入下列语句:</p>
+<pre><code>;;;Always do syntax
+(global-font-lock-mode 1)
+
+(setq show-paren-delay 0
+      show-paren-style &apos;parentheses)
+(show-paren-mode 1)
+;;; 若直接使用 mit-scheme 后在 emacs 里执行 run-scheme 报错，则最好使用 mit-scheme 的绝对路径
+(setq scheme-program-name &quot;/usr/local/bin/mit-scheme&quot;)</code></pre></li>
+<li><p>打开 emacs ，使用命令 <code>M-x run-scheme</code> 即可</p>
+</li>
+</ul>
+<h3 id="sublime-text-中集成-mit-scheme"><a href="#sublime-text-中集成-mit-scheme" class="headerlink" title="sublime-text 中集成 mit-scheme"></a>sublime-text 中集成 mit-scheme</h3><ol>
+<li><p>安装 <code>Scheme</code> 和 <code>SublimeREPL</code> 两个插件</p>
+</li>
+<li><p>避免出现 <em>无法加载Scheme.tmLanguage</em> 需手动安装<a href="https://github.com/masondesu/sublime-scheme-syntax" target="_blank" rel="noopener">sublime-scheme-syntax</a>, 放到 <code>Packages</code> 目录下即可</p>
+<pre><code>cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages
+git clone git@github.com:masondesu/sublime-scheme-syntax.git</code></pre></li>
+<li><p>Sublime左右显示两个Layout。</p>
+<pre><code>View &gt; Layout &gt; Columns:2</code></pre></li>
+<li><p>运行 scheme 交互</p>
+<pre><code>Tools &gt; SublimeREPL &gt; Scheme</code></pre></li>
+</ol>
+<p>p.s.: 看来 sublime 的 <code>build</code> 文档，还是没法实现直接 <code>command + b</code> 来直接运行当前的 scheme 源文件</p>
+
+  </div>
+</article>
+
+<div id="paginator">
+  
+</div>
+
+      </div>
+    </div>
+    
+<footer class="footer">
+    <div id="bottom-inner">
+      &copy; Conan
+      
+        <span>2016</span> &mdash;
+      
+      <span>2019</span>
+    </div>
+</footer>
+
+  </div>
+
+  
+    
+      <script src="/js/hello.js"></script>
+    
+  
+
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-35288944-1"></script>
+<script>
+  var host = window.location.hostname;
+  if (host != "localhost" || host != "127.0.0.1") {
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-35288944-1');
+  }
+</script>
+
+
+
+</body>
+</html>
